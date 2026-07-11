@@ -8,9 +8,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static frontend files from the root directory
-app.use(express.static(__dirname));
-
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 let tasks = []; 
 
@@ -63,11 +60,6 @@ app.put('/api/tasks/:id', (req, res) => {
   } else {
     res.status(404).json({ error: "Task not found" });
   }
-});
-
-// Fallback route to ensure index.html is served for root requests
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
