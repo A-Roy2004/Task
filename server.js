@@ -8,6 +8,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// This serves your index.html and CSS locally without crashing Vercel
+app.use(express.static(__dirname));
+
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 let tasks = []; 
 
